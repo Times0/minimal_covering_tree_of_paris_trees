@@ -17,7 +17,6 @@ void free_graph(graph *g){
     {
         coord_free(g->coords[i]);
     }
-    
     free(g->coords);
     free(g->noeuds);
     free(g);
