@@ -8,3 +8,11 @@ gcc -o tests.o -c tests.c -g -lm
 gcc -o coords.o -c coords.c -g -lm
 gcc -o graph.o -c graph.c -g -lm
 gcc -o tests tests.o coords.o graph.o -g -lm
+
+####
+#### Execution avec Valgrind
+####
+test_coords
+Done
+test_graph
+Done

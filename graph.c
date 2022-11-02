@@ -4,6 +4,7 @@
 
 graph* create_graph(int n){
     graph *g = malloc(sizeof(graph));
+    g->n = n;
     g->adjacences = (double **)malloc(n * sizeof(double*));
     for(int i = 0; i < n; i++) g->adjacences[i] = (double *)malloc(n * sizeof(int));
     g->noeuds = malloc(sizeof(int) * n);
@@ -12,6 +13,11 @@ graph* create_graph(int n){
 }
 
 void free_graph(graph *g){
+    for (size_t i = 0; i < g->n; i++)
+    {
+        free(g->adjacences[i]);
+    }
+    
     free(g->adjacences);
     for (size_t i = 0; i < g->n; i++)
     {
