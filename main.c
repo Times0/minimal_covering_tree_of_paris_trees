@@ -3,9 +3,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include "pair.c"
-#include <math.h>
-#include "graph.c"
+#include "coords.h"
+#include "graph.h"
 
 char* trunca(const char * s, int a, int b){
     int n = b-a+1;
@@ -51,14 +50,6 @@ const char* getfield(const char* line, int num)
     return res;
 }
 
-double _distance(pair_t *a, pair_t *b){
-    return sqrt((a->x - b->x)*(a->x - b->x) + (a->y-b->y)*((a->y-b->y)));
-}
-
-double distance(pair_t **coords, int i, int j){
-    return _distance(coords[i], coords[j]);
-}
-
 int 
 main(int argc, char** argv){
     int flag_i = 0;
@@ -96,26 +87,31 @@ main(int argc, char** argv){
     int c = 0;
 
     int n = 200000;
-    graph *g = create_graph();
-    pair_t **l_noeuds = malloc(sizeof(pair_t) * n);
-    g->noeuds = malloc(sizeof(int) * n);
+    printf("n : %d\n",n);
+    graph *g = create_graph(n);
+    printf("Created graph\n");
+    g->coords[0] = coord_create(500,266);
     fgets(line,1024,csvfile); //get rid of the first line with name of columns
     while (fgets(line, 1024, csvfile)&&c<n)
     {
         double a;
         double b;
+        printf("a");
         sscanf(getfield(line, 16),"%lf,%lf", &a, &b);
-        pair_t *coords = pair_create(a,b);
-        l_noeuds[c] = coords;
-        //printf("Adresse de l'arbre %d : c1 is %lf c2 is %lf\n",atoi(getfield(line,0)),pair_get_first(coords),pair_get_second(coords));
+        printf("b");
+        coord_t *coords = coord_create(a,b);
+        printf("c");
+        g->coords[c] = coords;
+        printf("d");
+        //printf("Adresse de l'arbre %d : c1 is %lf c2 is %lf\n",atoi(getfield(line,0)),coord_get_first(coords),coord_get_second(coords));
         g->noeuds[c] = c;
         c++;
     }
+    printf("Done parsing csv\n");
 
-    g->coords = l_noeuds;
-    
-    printf("Noeud numéro %d, coords : ", g->noeuds[75]);
-    printpair(g->coords[75]);
+    int num = 25;
+    printf("Noeud numéro %d, coords : ", g->noeuds[num]);
+    printcoord(g->coords[num]);
     free_graph(g);
     return 0;
 }
