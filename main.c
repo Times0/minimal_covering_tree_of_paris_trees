@@ -96,13 +96,9 @@ main(int argc, char** argv){
     {
         double a;
         double b;
-        printf("a");
         sscanf(getfield(line, 16),"%lf,%lf", &a, &b);
-        printf("b");
         coord_t *coords = coord_create(a,b);
-        printf("c");
         g->coords[c] = coords;
-        printf("d");
         //printf("Adresse de l'arbre %d : c1 is %lf c2 is %lf\n",atoi(getfield(line,0)),coord_get_first(coords),coord_get_second(coords));
         g->noeuds[c] = c;
         c++;
