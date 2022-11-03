@@ -86,7 +86,7 @@ main(int argc, char** argv){
 
     int c = 0;
 
-    int n = 5;
+    int n = 200000;
     printf("n : %d\n",n);
     graph *g = create_graph(n);
     printf("Created graph\n");
@@ -116,12 +116,13 @@ main(int argc, char** argv){
     
 
     int num = n /2;
-    printf("Noeud numéro %d, coords : ", g->noeuds[num]);
+    printf("Node nb %d, coords : \n", g->noeuds[num]);
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            printf("Distance de %d à %d : %lf\n", i,j, g->adjacences[i][j]);
+            if(i==j){continue;}
+            printf("Distance %d -> %d : %lf\n", i,j, g->adjacences[i][j]);
         }
         
     }
