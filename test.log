@@ -18,3 +18,15 @@ test_graph
 Done
 test_prims
 Done
+
+####
+#### Execution avec Valgrind
+####
+test_coords
+Done
+test_graph_complet
+Done
+test_graph
+Done
+test_prims
+Done
