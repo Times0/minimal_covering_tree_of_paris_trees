@@ -20,7 +20,6 @@ fail ()
     coloredEcho "==> Échec du test '$COURANT'" red
     coloredEcho "==> Voir le fichier ./$TESTDIR/$LOG" red
     coloredEcho "==> Exit" red
-    echo "$NOTE/100" > note.txt
     exit 1
 }
 

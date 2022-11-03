@@ -15,7 +15,7 @@ graph *create_graph(int n)
     for (size_t i = 0; i < n; i++)
     {
         g->noeuds[i] = i;
-    } // init nodes values
+    }
     g->coords = malloc(sizeof(coord_t) * n);
     return g;
 }
@@ -86,7 +86,7 @@ graph *acm_complet_prim(graph_complet *g)
     graph *res = create_graph(n);
     for (size_t i = 0; i < n; i++)
     {
-        res->coords[i] = g->coords[i];
+        res->coords[i] = coord_create(coord_get_first(g->coords[i]),coord_get_second(g->coords[i]));
     }
     int no_edge; // number of edge
 

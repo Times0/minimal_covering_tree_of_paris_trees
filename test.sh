@@ -26,14 +26,17 @@ touch "$LOG"
 #
 
 annoncer "Compilation"
-make clean >> $LOG 2>&1 || fail
-make tests >> $LOG 2>&1 || fail
+make clean
+make $TARGET >> $LOG 2>&1 || fail
 coloredEcho "OK" green
 
 
+annoncer "Execution"
+./$TARGET >> $LOG 2>&1 || fail
+coloredEcho "OK" green
 
 annoncer "Execution avec Valgrind"
 valgrind --error-exitcode=43 --leak-check=full -q ./$TARGET >> $LOG 2>&1 || fail
 coloredEcho "OK" green
-make clean
+
 exit 0

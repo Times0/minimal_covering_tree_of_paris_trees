@@ -21,6 +21,11 @@ void test_graph_complet()
   {
     tps_assert(g->noeuds[i] == i);
   }
+  for (int i = 0; i < n; i++)
+  {
+    g->coords[i] = coord_create(10,10);
+  }
+  
   free_graph_complet(g);
 }
 
@@ -89,15 +94,17 @@ void test_prims()
 
   tps_assert(acm != NULL);
   tps_assert(acm->size == g->size);
+  tps_assert(acm->noeuds != g->noeuds);
   tps_assert(acm->coords != g->coords);
-  tps_assert(acm->coords[0] == g->coords[0]);
+  tps_assert(acm->coords[0] != g->coords[0]);
+  tps_assert(coord_get_first(acm->coords[0]) == coord_get_first(g->coords[0]));
   tps_assert(acm->adjacences[0][1] != 0);
   tps_assert(acm->adjacences[1][2] != 0);
   tps_assert(acm->adjacences[0][0] == 0);
   tps_assert(acm->adjacences[0][2] == 0);
 
   free_graph(acm);
-  free_graph(g);
+  free_graph_complet(g);
 }
 
 int main(void)
