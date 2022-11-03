@@ -29,6 +29,9 @@ annoncer "Compilation"
 make clean >> $LOG 2>&1 || fail
 make tests >> $LOG 2>&1 || fail
 coloredEcho "OK" green
-make clean
 
+annoncer "Execution sans Valgrind"
+./$TARGET 
+coloredEcho "OK" green
+make clean
 exit 0
