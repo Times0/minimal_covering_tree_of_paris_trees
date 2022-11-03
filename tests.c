@@ -95,6 +95,9 @@ void test_prims()
   tps_assert(acm->adjacences[1][2] != 0);
   tps_assert(acm->adjacences[0][0] == 0);
   tps_assert(acm->adjacences[0][2] == 0);
+
+  free_graph(acm);
+  free_graph(g);
 }
 
 int main(void)
