@@ -6,7 +6,7 @@ graph* create_graph(int n){
     graph *g = malloc(sizeof(graph));
     g->n = n;
     g->adjacences = (double **)malloc(n * sizeof(double*));
-    for(int i = 0; i < n; i++) g->adjacences[i] = (double *)malloc(n * sizeof(int));
+    for(int i = 0; i < n; i++) g->adjacences[i] = (double *)calloc(n, sizeof(double));
     g->noeuds = malloc(sizeof(int) * n);
     g->coords = malloc(sizeof(coord_t) * n); 
     return g;

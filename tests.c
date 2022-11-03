@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "tps_unit_test.h"
 
+
 TEST_INIT_GLOBAL
 
 
@@ -14,22 +15,30 @@ void test_coords(){
 }
 
 void test_graph(){
-  graph *g = create_graph(5);
+  int n = 5;
+  graph *g = create_graph(n);
   tps_assert(g!=NULL);
+
+  // test calloc init
+
+  for (size_t i = 0; i < n; i++)
+  {
+    for (size_t j = 0; j < n; j++)
+    {
+      tps_assert(g->adjacences[i][j] == 0);
+    }
+    
+  }
+  
 
   for (size_t i = 0; i < 5; i++)
   {
     g->noeuds[i] = i;
-  }
-  tps_assert(g->noeuds[4] == 4);
-
-  for (size_t i = 0; i < 5; i++)
-  {
     g->coords[i] = coord_create(500,600);
+    tps_assert(g->noeuds[i] == i);
+    tps_assert(g->coords[i]->x == 500);  
   }
-  tps_assert(g->coords[1]->x == 500);
   free_graph(g);
-  
 }
 
 

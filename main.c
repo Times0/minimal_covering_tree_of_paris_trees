@@ -86,7 +86,7 @@ main(int argc, char** argv){
 
     int c = 0;
 
-    int n = 200000;
+    int n = 5;
     printf("n : %d\n",n);
     graph *g = create_graph(n);
     printf("Created graph\n");
@@ -105,8 +105,27 @@ main(int argc, char** argv){
     }
     printf("Done parsing csv\n");
 
-    int num = 25;
+    for (size_t i = 0; i < n; i++)
+    {
+        for (size_t j = 0; j < n; j++)
+        {
+            if (i==j){continue;}
+            g->adjacences[i][j] = distance(g->coords, i, j);
+        }
+    }
+    
+
+    int num = n /2;
     printf("Noeud numéro %d, coords : ", g->noeuds[num]);
+    for (size_t i = 0; i < n; i++)
+    {
+        for (size_t j = 0; j < n; j++)
+        {
+            printf("Distance de %d à %d : %lf\n", i,j, g->adjacences[i][j]);
+        }
+        
+    }
+    
     printcoord(g->coords[num]);
     free_graph(g);
     return 0;
