@@ -110,11 +110,10 @@ int main(int argc, char **argv)
     char line[1024];
 
 
-    int n = 100;
+    int n = 10000;
     printf("n : %d\n", n);
-    graph *g = create_graph(n);
-    printf("Created graph\n");
-    g->coords[0] = coord_create(500, 266);
+    graph_complet *g = create_graph_complet(n);
+    printf("Initialised graph\n");
     fgets(line, 1024, csvfile); // get rid of the first line with name of columns
     int c = 0;
     while (fgets(line, 1024, csvfile) && c < n)
@@ -125,22 +124,16 @@ int main(int argc, char **argv)
         g->noeuds[c] = c;
         c++;
     }
-    printf("Done parsing csv\n");
+    printf("Done parsing csv and creating graph\n");
 
     int num = n / 2;
-    printf("Node nb %d, coords : \n", g->noeuds[num]);
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if (i == j)
-            {
-                continue;
-            }
-            printf("Distance %d -> %d : %lf\n", i, j, distance(g->coords,i,j));
-        }
-    }
+    printf("Node nb %d, coords : ", g->noeuds[num]);
+    printcoord(g->coords[num]);
+    
+    graph *acm = acm_complet_prim(g);
 
-    free_graph(g);
+    printf("Created minimal spanning tree\n");
+
+    free_graph_complet(g);
     return 0;
 }
