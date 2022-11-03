@@ -7,4 +7,8 @@ rm -f tests
 gcc -o tests.o -c tests.c -g -lm
 gcc -o coords.o -c coords.c -g -lm
 gcc -o graph.o -c graph.c -g -lm
+graph.c: In function 'create_graph_complet':
+graph.c:22:12: warning: return from incompatible pointer type [-Wincompatible-pointer-types]
+     return g;
+            ^
 gcc -o tests tests.o coords.o graph.o -g -lm

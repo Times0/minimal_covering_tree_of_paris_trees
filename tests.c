@@ -8,10 +8,20 @@ TEST_INIT_GLOBAL
 
 
 void test_coords(){
-    coord_t *c = coord_create(500,600);
-    tps_assert(c!=NULL);
-    tps_assert(c->x == 500);
-    coord_free(c);
+  coord_t *c = coord_create(500,600);
+  tps_assert(c!=NULL);
+  tps_assert(c->x == 500);
+  coord_free(c);
+}
+
+void test_graph_complet(){
+  int n = 10;
+  graph_complet *g = create_graph_complet(n);
+  for (int i = 0; i < n; i++)
+  {
+    tps_assert(g->noeuds[i] == i);
+  }
+  free_graph_complet(g);
 }
 
 void test_graph(){
@@ -33,7 +43,6 @@ void test_graph(){
 
   for (size_t i = 0; i < 5; i++)
   {
-    g->noeuds[i] = i;
     g->coords[i] = coord_create(500,600);
     tps_assert(g->noeuds[i] == i);
     tps_assert(g->coords[i]->x == 500);  
@@ -41,9 +50,9 @@ void test_graph(){
   free_graph(g);
 }
 
-
 int main(void)
 {
   TEST(test_coords);
+  TEST(test_graph_complet);
   TEST(test_graph);
 }
