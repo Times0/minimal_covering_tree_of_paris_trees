@@ -39,7 +39,7 @@ void free_graph(graph *g)
 /*Graphe dense / graphe complet*/
 graph_complet *create_graph_complet(int n)
 {
-    graph *g = malloc(sizeof(graph));
+    graph_complet *g = malloc(sizeof(graph));
     g->n = n;
     g->noeuds = malloc(sizeof(int) * n);
     for (size_t i = 0; i < n; i++)

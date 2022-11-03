@@ -109,38 +109,23 @@ int main(int argc, char **argv)
     FILE *csvfile = fopen(value_i, "r");
     char line[1024];
 
-    int c = 0;
 
-    int n = 200000;
+    int n = 100;
     printf("n : %d\n", n);
     graph *g = create_graph(n);
     printf("Created graph\n");
     g->coords[0] = coord_create(500, 266);
     fgets(line, 1024, csvfile); // get rid of the first line with name of columns
+    int c = 0;
     while (fgets(line, 1024, csvfile) && c < n)
     {
-        double a;
-        double b;
+        double a,b;
         sscanf(getfield(line, 16), "%lf,%lf", &a, &b);
-        coord_t *coords = coord_create(a, b);
-        g->coords[c] = coords;
-        // printf("Adresse de l'arbre %d : c1 is %lf c2 is %lf\n",atoi(getfield(line,0)),coord_get_first(coords),coord_get_second(coords));
+        g->coords[c] = coord_create(a, b);
         g->noeuds[c] = c;
         c++;
     }
     printf("Done parsing csv\n");
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            if (i == j)
-            {
-                continue;
-            }
-            g->adjacences[i][j] = distance(g->coords, i, j);
-        }
-    }
 
     int num = n / 2;
     printf("Node nb %d, coords : \n", g->noeuds[num]);
@@ -152,11 +137,10 @@ int main(int argc, char **argv)
             {
                 continue;
             }
-            printf("Distance %d -> %d : %lf\n", i, j, g->adjacences[i][j]);
+            printf("Distance %d -> %d : %lf\n", i, j, distance(g->coords,i,j));
         }
     }
 
-    printcoord(g->coords[num]);
     free_graph(g);
     return 0;
 }
