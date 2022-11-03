@@ -105,9 +105,9 @@ main(int argc, char** argv){
     }
     printf("Done parsing csv\n");
 
-    for (size_t i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (size_t j = 0; j < n; j++)
+        for (int j = 0; j < n; j++)
         {
             if (i==j){continue;}
             g->adjacences[i][j] = distance(g->coords, i, j);
@@ -117,9 +117,9 @@ main(int argc, char** argv){
 
     int num = n /2;
     printf("Noeud numéro %d, coords : ", g->noeuds[num]);
-    for (size_t i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (size_t j = 0; j < n; j++)
+        for (int j = 0; j < n; j++)
         {
             printf("Distance de %d à %d : %lf\n", i,j, g->adjacences[i][j]);
         }
